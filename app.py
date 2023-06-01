@@ -143,28 +143,21 @@ def cleaning(doc):
 embed = hub.load("https://tfhub.dev/google/universal-sentence-encoder/4")
 
 def feature_USE_fct(sentence):
-    feat = embed([sentence])  # Passage de la phrase en tant que liste
+    feat = embed(sentence)  # Maintenant sentence est une liste
     return feat
 
-### Fonction qui, à partir du texte rentré par l'utilisateur, va retourner une prédiction de tag :
-
 def applying(text):
-    text = clean_balise(text) #utilisation des fonctions de prétraitement de text
+    text = clean_balise(text)
     text = cleaning(text)
-    text = feature_USE_fct(text) # transformation du texte en feature compatible avec notre modèle de prédiction
-    text_USE = pd.DataFrame(text)
-    prediction = sgd.predict(text_USE) #prediction du texte
-    tag_pred = mlb.inverse_transform(prediction) #transformation de la target binarizée en target lisible 
+    text_to_encode = [text]  # Mettre le texte nettoyé dans une liste
+    text = feature_USE_fct(text_to_encode) # transformation du texte en feature
+    text_USE = pd.DataFrame(text.numpy())  # Conversion du tenseur en DataFrame
+    prediction = sgd.predict(text_USE)  # prediction du texte
+    tag_pred = mlb.inverse_transform(prediction)  # transformation de la target binarizée en target lisible 
     if len(tag_pred) == 0:
         return  "Le corps de votre texte ne contient pas de mot pertinent. Ressayez avec des termes plus techniques"
-    else: return f"Proposition de tag :{tag_pred}" #affichage des tags prédits
- 
- 
+    else: return f"Proposition de tag :{tag_pred}"  # affichage des tags prédits
 
-
-############### Mise en page ###################
-
-####Arriere plan
 def get_base64(bin_file):
     with open(bin_file, 'rb') as f:
         data = f.read()
@@ -184,28 +177,15 @@ def set_background(png_file):
 
 set_background('background.jpg')
 
-### chargement de l'image :
 image_url = Image.open('logo.png')
 st.image(image_url, use_column_width=True)
 
-
-
-# Titre : 
 st.title("Keyword prediction tool Stackoverflow ") 
 
-
-#################################################
-# Données entrées par l'utilisateur :
 Title_input = st.text_input("Write the title of your request below")
 input_body_utilisateurs = st.text_area("Enter the content of your request below ", height=200)
 
-#Réponse de notre modèle : 
-
 reponse = applying(input_body_utilisateurs)
 
-#Bouton de validation :
-if st.button("Valider"):#si l'utilisateur appui sur valider 
+if st.button("Valider"):
     st.text(reponse)
-
-
-
