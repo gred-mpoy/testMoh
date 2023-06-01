@@ -183,7 +183,7 @@ st.image(image_url, use_column_width=True)
 st.title("Keyword prediction tool Stackoverflow ") 
 
 Title_input = st.text_input("Write the title of your request below")
-input_body_utilisateurs = st.sidebar.text_input("Enter the content of your request below ", height=200)
+input_body_utilisateurs = st.sidebar.text_input("Enter the content of your request below ")
 
 #reponse = applying(input_body_utilisateurs)
 
