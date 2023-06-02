@@ -147,7 +147,7 @@ def feature_USE_fct(sentence):
     return feat
 
 def applying(text):
-    text = clean_balise(text)
+    #text = clean_balise(text)
     text = cleaning(text)
     text_to_encode = [text]  # Mettre le texte nettoyé dans une liste
     text = feature_USE_fct(text_to_encode) # transformation du texte en feature
