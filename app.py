@@ -1,12 +1,12 @@
 #importation des packages de base :
 
-import pandas as pd
-import numpy as np
-import os
+#import pandas as pd
+#import numpy as np
+#import os
 
 #import package nécessaire au prétraitement de texte :
 
-from bs4 import BeautifulSoup
+#from bs4 import BeautifulSoup
 
 import nltk 
 from nltk.stem import WordNetLemmatizer, PorterStemmer
@@ -17,18 +17,18 @@ nltk.download("stopwords")
 
 #import des packages pour la prédiction :
 
-from sklearn.preprocessing import MultiLabelBinarizer
-from sklearn.model_selection import train_test_split
-from sklearn.multiclass import OneVsRestClassifier
+#from sklearn.preprocessing import MultiLabelBinarizer
+#from sklearn.model_selection import train_test_split
+#from sklearn.multiclass import OneVsRestClassifier
 
 #import modeles : 
-from sklearn.linear_model import  SGDClassifier
+#from sklearn.linear_model import  SGDClassifier
 
 #import embedding : 
-os.environ["CUDA_VISIBLE_DEVICES"] = "0"
+#os.environ["CUDA_VISIBLE_DEVICES"] = "0"
 # os.environ['TF_ENABLE_MLIR_OPTIMIZATIONS'] = '1'
 import tensorflow_hub as hub 
-import tensorflow
+#import tensorflow
 
 #import pour charger fichier : 
 import pickle
@@ -59,10 +59,10 @@ mlb = pickle.load(open("mlb","rb"))
 
 #fonction suppression des balises html : 
 
-def clean_balise(text):
-    soup = BeautifulSoup(text, 'html.parser')
-    clean_text = soup.get_text()
-    return clean_text
+#def clean_balise(text):
+    #soup = BeautifulSoup(text, 'html.parser')
+    #clean_text = soup.get_text()
+    #return clean_text
     
 ########### Fonction 2 : ###########
 ####################################
